@@ -1,3 +1,5 @@
+package geometry;
+
 public interface IPoint {
 
     double getX();

@@ -1,3 +1,5 @@
+package geometry;
+
 public class Line extends ACurve {
 
     public Line(IPoint a, IPoint b) {
@@ -10,9 +12,7 @@ public class Line extends ACurve {
 
     @Override
     public IPoint getPoint(double t) {
-        IPoint point = new Point();
-        point.setX(calculateLine(a.getX(), b.getX(), t));
-        point.setY(calculateLine(a.getY(), b.getY(), t));
-        return point;
+        return new Point(calculateLine(a.getX(), b.getX(), t),
+                calculateLine(a.getY(), b.getY(), t));
     }
 }

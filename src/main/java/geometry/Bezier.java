@@ -1,3 +1,5 @@
+package geometry;
+
 public class Bezier extends ACurve {
 
     private IPoint c;
@@ -18,9 +20,7 @@ public class Bezier extends ACurve {
 
     @Override
     public IPoint getPoint(double t) {
-        IPoint point = new Point();
-        point.setX(calculateBezier(a.getX(), c.getX(), d.getX(), b.getX(), t));
-        point.setY(calculateBezier(a.getY(), c.getY(), d.getY(), b.getY(), t));
-        return point;
+        return new Point(calculateBezier(a.getX(), c.getX(), d.getX(), b.getX(), t),
+                calculateBezier(a.getY(), c.getY(), d.getY(), b.getY(), t));
     }
 }

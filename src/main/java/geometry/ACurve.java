@@ -1,3 +1,5 @@
+package geometry;
+
 public abstract class ACurve implements ICurve {
 
     protected IPoint a;
