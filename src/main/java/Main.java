@@ -15,7 +15,7 @@ import java.awt.geom.Line2D;
 public class Main extends JFrame {
 
     public static void main(String[] args) {
-        Service service = new Service(500);
+        Service service = new Service();
         UserInterface userInterface = new UserInterface(service);
         userInterface.run();
     }

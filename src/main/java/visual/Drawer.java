@@ -5,12 +5,10 @@ import visual.swing.Frame;
 
 public class Drawer {
 
-    private final int size;
     private final Frame frame;
 
-    public Drawer(int size) {
-        this.size = size;
-        frame = new Frame(this.size);
+    public Drawer() {
+        frame = new Frame();
     }
 
     public void drawLine(IPoint p1, IPoint p2) {

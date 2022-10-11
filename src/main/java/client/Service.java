@@ -8,17 +8,11 @@ import java.util.ArrayList;
 
 public class Service {
 
-    private Drawer drawer;
-    private final int canvasSize;
+    private final Drawer drawer;
 
-    public Service(int canvasSize) {
-        this.canvasSize = canvasSize;
+    public Service() {
 
-        drawer = new Drawer(canvasSize);
-    }
-
-    public int getSize() {
-        return this.canvasSize;
+        drawer = new Drawer();
     }
 
     public void draw(VisualCurve curve) {

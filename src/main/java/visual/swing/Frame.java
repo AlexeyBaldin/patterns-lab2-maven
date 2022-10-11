@@ -9,10 +9,9 @@ import java.util.ArrayList;
 public class Frame extends JFrame {
 
     private final Canvas canvas;
-    private final int size;
 
 
-    class CanvasLine {
+    static class CanvasLine {
         int x1;
         int y1;
         int x2;
@@ -28,9 +27,8 @@ public class Frame extends JFrame {
 
     private ArrayList<CanvasLine> lines;
 
-    public Frame(int size) {
-        this.size = size;
-        setSize(this.size, this.size);
+    public Frame() {
+        setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         lines = new ArrayList<>();
         this.canvas = new Canvas() {
@@ -54,7 +52,7 @@ public class Frame extends JFrame {
     }
 
     public void clear() {
-        canvas.getGraphics().clearRect(0, 0, this.size, this.size);
+        canvas.getGraphics().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         lines.clear();
     }
 
