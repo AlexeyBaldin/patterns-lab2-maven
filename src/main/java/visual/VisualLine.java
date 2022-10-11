@@ -11,8 +11,6 @@ public class VisualLine extends VisualCurve {
 
     @Override
     public void draw(Drawer drawer) {
-        System.out.println("VisualLine.draw");
-
         drawer.drawLine(
                 this.curve.getPoint(0),
                 this.curve.getPoint(1)

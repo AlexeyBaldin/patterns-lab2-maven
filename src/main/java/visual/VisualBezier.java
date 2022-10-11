@@ -10,8 +10,6 @@ public class VisualBezier extends VisualCurve {
 
     @Override
     public void draw(Drawer drawer) {
-        System.out.println("VisualBezier.draw");
-
         int pointsCount = 100;
 
         for(int i = 1; i <= pointsCount; i++) {

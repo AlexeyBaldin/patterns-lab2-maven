@@ -1,14 +1,23 @@
 package visual;
 
 import geometry.IPoint;
-import swing.Frame;
+import visual.swing.Frame;
 
 public class Drawer {
 
-    private final Frame frame = new Frame();
+    private final int size;
+    private final Frame frame;
+
+    public Drawer(int size) {
+        this.size = size;
+        frame = new Frame(this.size);
+    }
 
     public void drawLine(IPoint p1, IPoint p2) {
-        System.out.println("Drawer is drawing");
-        frame.draw(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        frame.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+    }
+
+    public void clear() {
+        frame.clear();
     }
 }
