@@ -41,14 +41,14 @@ public class Frame extends JFrame {
         c.weighty = 0.3;
         c.gridwidth = 2;
         this.add(button, c);
-        JLabel label = new JLabel("Scheme 1");
+        JLabel label = new JLabel("Scheme 1", SwingConstants.CENTER);
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 1;
         c.weightx = 0.2;
         c.weighty = 0.2;
         this.add(label, c);
-        label = new JLabel("Scheme 2");
+        label = new JLabel("Scheme 2", SwingConstants.CENTER);
         c.gridx = 1;
         c.gridy = 1;
         this.add(label, c);
