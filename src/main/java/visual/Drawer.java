@@ -6,9 +6,11 @@ import visual.swing.Frame;
 public class Drawer {
 
     private final Frame frame;
+    private final Frame frame2;
 
     public Drawer() {
         frame = new Frame();
+        frame2 = new Frame();
     }
 
     public void drawLine(IPoint p1, IPoint p2) {
