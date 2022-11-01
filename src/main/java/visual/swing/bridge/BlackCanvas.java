@@ -6,9 +6,9 @@ public class BlackCanvas extends Canvas implements BridgeCanvas {
 
     @Override
     public void drawLine(double x1, double y1, double x2, double y2) {
-        this.getGraphics().setColor(Color.BLACK);
-        System.out.println(this.getGraphics().getColor());
-        this.getGraphics().drawLine((int)x1, (int)y1, (int)x2, (int)y2);
+        Graphics graphics = this.getGraphics();
+        graphics.setColor(Color.GREEN);
+        graphics.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
     }
 
     @Override
