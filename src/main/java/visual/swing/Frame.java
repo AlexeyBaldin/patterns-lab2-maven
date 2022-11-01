@@ -1,96 +1,61 @@
 package visual.swing;
 
+import visual.swing.bridge.BridgeCanvas;
+
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 public class Frame extends JFrame {
 
-    private final Canvas canvas;
-    private final Canvas canvas2;
+    private BridgeCanvas canvas1;
+    private BridgeCanvas canvas2;
 
-
-    static class CanvasLine {
-        int x1;
-        int y1;
-        int x2;
-        int y2;
-
-        public CanvasLine(int x1, int y1, int x2, int y2) {
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
-        }
+    private void addComponentToFrame(Component component, int fill, int gridx, int gridy, double weightx, double weighty, int gridwidth) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = fill;
+        c.gridx = gridx;
+        c.gridy = gridy;
+        c.weightx = weightx;
+        c.weighty = weighty;
+        c.gridwidth = gridwidth;
+        this.add(component, c);
     }
 
+    private void addComponentToFrame(BridgeCanvas canvas, int canvasIndex, int fill, int gridx, int gridy, double weightx, double weighty, int gridwidth) {
+        canvas.setSize(this.getWidth()/2, this.getHeight()/2);
+        if(canvasIndex == 0) {
+            this.canvas1 = canvas;
+        } else {
+            this.canvas2 = canvas;
+        }
+        addComponentToFrame((Component) canvas, fill, gridx, gridy, weightx, weighty, gridwidth);
+    }
 
-    public Frame() {
+    public Frame(BridgeCanvas canvas1, BridgeCanvas canvas2) {
         setSize(800, 800);
         this.setLayout(new GridBagLayout());
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JButton button = new JButton("Generate curve");
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 0.3;
-        c.weighty = 0.3;
-        c.gridwidth = 2;
-        this.add(button, c);
-        JLabel label = new JLabel("Scheme 1", SwingConstants.CENTER);
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.weightx = 0.2;
-        c.weighty = 0.2;
-        this.add(label, c);
-        label = new JLabel("Scheme 2", SwingConstants.CENTER);
-        c.gridx = 1;
-        c.gridy = 1;
-        this.add(label, c);
 
-        this.canvas = new Canvas();
-        c.gridx = 0;
-        c.gridy = 2;
-        c.weightx = 0.7;
-        c.weighty = 0.7;
-        this.canvas.setSize(this.getWidth()/2, this.getHeight()/2);
-        add(this.canvas, c);
-        this.canvas2 = new Canvas();
-        c.gridx = 1;
-        c.gridy = 2;
-        this.canvas2.setSize(this.getWidth()/2, this.getHeight()/2);
-        add(this.canvas2, c);
-        button = new JButton("Save Scheme 1 in SVG");
-        c.weightx = 0.2;
-        c.weighty = 0.2;
-        c.gridx = 0;
-        c.gridy = 3;
-        this.add(button,c);
-        button = new JButton("Save Scheme 2 in SVG");
-        c.weightx = 0.2;
-        c.weighty = 0.2;
-        c.gridx = 1;
-        c.gridy = 3;
-        this.add(button, c);
-
-
+        addComponentToFrame(new JButton("Generate curve"), GridBagConstraints.HORIZONTAL, 0, 0,0.2, 0.2, 2);
+        addComponentToFrame(new JLabel("Scheme 1", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 0, 1, 0.1, 0.1, 1);
+        addComponentToFrame(new JLabel("Scheme 2", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 1, 1, 0.1, 0.1, 1);
+        addComponentToFrame(canvas1,0, GridBagConstraints.HORIZONTAL, 0, 2, 0.8, 0.8, 1);
+        addComponentToFrame(canvas2,1, GridBagConstraints.HORIZONTAL, 1, 2, 0.8, 0.8, 1);
+        addComponentToFrame(new JButton("Save Scheme 1 in SVG"), GridBagConstraints.HORIZONTAL, 0, 3, 0.2, 0.2, 1);
+        addComponentToFrame(new JButton("Save Scheme 2 in SVG"), GridBagConstraints.HORIZONTAL, 1, 3, 0.2, 0.2, 1);
 
         setVisible(true);
-
     }
 
     public void drawLine(double x1, double y1, double x2, double y2) {
-        canvas.getGraphics().drawLine((int)x1, (int)y1, (int)x2, (int)y2);
-        canvas2.getGraphics().drawLine(0, 0, 300, 300);
+        canvas1.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
+        canvas2.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
     }
 
     public void clear() {
-        canvas.getGraphics().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        canvas1.clear();
+        canvas2.clear();
     }
 
 }

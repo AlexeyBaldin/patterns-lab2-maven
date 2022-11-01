@@ -21,7 +21,7 @@ public class UserInterface {
 
     public void run() {
         boolean isRunning = true;
-        System.out.println("Line|Bezier|Clear|Stop");
+        System.out.println("Line|Bezier|Clear");
         while (isRunning) {
 
             System.out.print("Action: ");
