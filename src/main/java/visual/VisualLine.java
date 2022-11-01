@@ -6,16 +6,13 @@ import geometry.Point;
 public class VisualLine extends VisualCurve {
 
     public VisualLine(Line line) {
-        this.curve = line;
+        super(line);
     }
 
     @Override
-    public void draw(Drawer drawer) {
-        System.out.println("VisualLine.draw");
-
-        drawer.drawLine(
-                this.curve.getPoint(0),
-                this.curve.getPoint(1)
-        );
+    public void draw(IScheme scheme) {
+        scheme.drawStartPoint(getPoint(0));
+        scheme.drawLine(getPoint(0), getPoint(1));
+        scheme.drawEndPoint(getPoint(1));
     }
 }

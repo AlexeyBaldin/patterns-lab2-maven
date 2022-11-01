@@ -5,7 +5,7 @@ import geometry.Bezier;
 public class VisualBezier extends VisualCurve {
 
     public VisualBezier(Bezier bezier) {
-        this.curve = bezier;
+        super(bezier);
     }
 
     @Override
