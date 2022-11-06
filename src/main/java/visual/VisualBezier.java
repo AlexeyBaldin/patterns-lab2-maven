@@ -9,16 +9,15 @@ public class VisualBezier extends VisualCurve {
     }
 
     @Override
-    public void draw(Drawer drawer) {
-        System.out.println("VisualBezier.draw");
-
-        int pointsCount = 100;
-
+    public void draw(IScheme scheme) {
+        scheme.drawStartPoint(getPoint(0));
+        int pointsCount = 50;
         for(int i = 1; i <= pointsCount; i++) {
-            drawer.drawLine(
-                    this.curve.getPoint(((double)(i)/pointsCount)),
-                    this.curve.getPoint(((double)(i + 1))/pointsCount)
+            scheme.drawLine(
+                    getPoint(((double)(i)/pointsCount)),
+                    getPoint(((double)(i + 1))/pointsCount)
             );
         }
+        scheme.drawEndPoint(getPoint(1));
     }
 }

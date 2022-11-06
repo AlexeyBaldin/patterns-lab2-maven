@@ -5,7 +5,7 @@ import geometry.IPoint;
 
 public abstract class VisualCurve implements ICurve, IDrawable {
 
-    private ICurve curve;
+    private final ICurve curve;
 
     public VisualCurve(ICurve curve) {
         this.curve = curve;
