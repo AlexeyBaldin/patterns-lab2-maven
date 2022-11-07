@@ -12,7 +12,7 @@ public class BlackCanvas extends Canvas implements IScheme {
     @Override
     public void drawStartPoint(IPoint point) {
         Graphics graphics = this.getGraphics();
-        graphics.drawRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
+        graphics.drawRect((int)point.getX() - radius, (int)point.getY() - radius, radius, radius);
     }
 
     @Override
@@ -23,8 +23,8 @@ public class BlackCanvas extends Canvas implements IScheme {
         int pointsCount = (int)(length/3);
         pointsCount+=2;
 
-        double stepX = Math.abs((point1.getX() - point.getX()))/pointsCount;
-        double stepY = Math.abs((point1.getY() - point.getY()))/pointsCount;
+        double stepX = (point1.getX() - point.getX())/pointsCount;
+        double stepY = (point1.getY() - point.getY())/pointsCount;
         double lastX = point.getX();
         double lastY = point.getY();
         for (int i = 0; i < pointsCount; i++) {
@@ -34,15 +34,15 @@ public class BlackCanvas extends Canvas implements IScheme {
 
             lastX += stepX;
             lastY += stepY;
-            System.out.println(length+ " " + stepX + " " + i + " " + lastX);
+//            System.out.println(length+ " " + stepX + " " + i + " " + lastX);
         }
 
 
     }
 
     @Override
-    public void drawEndPoint(IPoint point) {
+    public void drawEndPoint(IPoint point, IPoint prevPoint) {
         Graphics graphics = this.getGraphics();
-        graphics.drawRect((int)point.getX()-radius/2, (int)point.getY()-radius/2, radius, radius);
+        graphics.drawRect((int)point.getX()-radius, (int)point.getY()-radius, radius, radius);
     }
 }
