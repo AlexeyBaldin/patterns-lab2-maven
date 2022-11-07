@@ -1,18 +1,19 @@
-package visual.swing;
+package visual;
 
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
-import visual.IScheme;
-import visual.VisualBezier;
-import visual.VisualLine;
+import visual.drawable.VisualBezier;
+import visual.drawable.VisualLine;
+import visual.scheme.canvas.BlackCanvas;
+import visual.scheme.canvas.GreenCanvas;
+import visual.scheme.IScheme;
+import visual.scheme.SchemeComposite;
+import visual.scheme.svg.BlackSVG;
+import visual.scheme.svg.GreenSVG;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Frame extends JFrame {
@@ -36,20 +37,28 @@ public class Frame extends JFrame {
 
     public Frame() {
 
-        IScheme greenCanvas = new GreenCanvas();
-        IScheme blackCanvas = new BlackCanvas();
+        GreenCanvas greenCanvas = new GreenCanvas();
+        BlackCanvas blackCanvas = new BlackCanvas();
+        GreenSVG greenSVG = new GreenSVG();
+        BlackSVG blackSVG = new BlackSVG();
 
-        this.schemeComposite = new SchemeComposite(greenCanvas, blackCanvas);
+        this.schemeComposite = new SchemeComposite(greenCanvas, blackCanvas, greenSVG, blackSVG);
 
         setSize(800, 800);
         this.setLayout(new GridBagLayout());
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         JButton generateButton = new JButton("Generate curve");
+
+        JButton swgOneButton = new JButton("Save Scheme 1 in SVG");
+        swgOneButton.setEnabled(false);
+
+        JButton swgTwoButton = new JButton("Save Scheme 2 in SVG");
+        swgTwoButton.setEnabled(false);
+
         generateButton.addActionListener(e -> {
-            System.out.print("Action(Line|Bezier|Clear): ");
+            System.out.print("Action(Line|Bezier): ");
             String input = scanner.next();
             switch (input.toLowerCase()) {
                 case "line":
@@ -62,6 +71,10 @@ public class Frame extends JFrame {
                             new Point(x1, y1),
                             new Point(x2, y2)
                     )).draw(schemeComposite);
+
+                    swgOneButton.setEnabled(true);
+                    swgTwoButton.setEnabled(true);
+
                     break;
                 case "bezier":
                     System.out.print("Bezier coordinates: ");
@@ -81,8 +94,8 @@ public class Frame extends JFrame {
                             new Point(x4b, y4b)
                     )).draw(schemeComposite);
 
-                    break;
-                case "clear":
+                    swgOneButton.setEnabled(true);
+                    swgTwoButton.setEnabled(true);
 
                     break;
                 default:
@@ -96,21 +109,21 @@ public class Frame extends JFrame {
 
         addComponentToFrame(new JLabel("Scheme 2", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 1, 1, 0.1, 0.1, 1, false);
 
-        addComponentToFrame((Canvas) greenCanvas, GridBagConstraints.HORIZONTAL, 0, 2, 0.8, 0.8, 1, true);
+        addComponentToFrame(greenCanvas, GridBagConstraints.HORIZONTAL, 0, 2, 0.8, 0.8, 1, true);
 
-        addComponentToFrame((Canvas) blackCanvas, GridBagConstraints.HORIZONTAL, 1, 2, 0.8, 0.8, 1, true);
+        addComponentToFrame(blackCanvas, GridBagConstraints.HORIZONTAL, 1, 2, 0.8, 0.8, 1, true);
 
-        JButton swgOneButton = new JButton("Save Scheme 1 in SVG");
+
         swgOneButton.addActionListener(e -> {
-            System.out.println("swg1");
-            System.out.println("swg1");
+            greenSVG.flush("scheme1");
+            System.out.println("SVG save is done in file: scheme1.svg");
         });
         addComponentToFrame(swgOneButton, GridBagConstraints.HORIZONTAL, 0, 3, 0.2, 0.2, 1, false);
 
-        JButton swgTwoButton = new JButton("Save Scheme 2 in SVG");
-        swgOneButton.addActionListener(e -> {
-            System.out.println("swg2");
-            System.out.println("swg2");
+
+        swgTwoButton.addActionListener(e -> {
+            blackSVG.flush("scheme2");
+            System.out.println("SVG save is done in file: scheme2.svg");
         });
         addComponentToFrame(swgTwoButton, GridBagConstraints.HORIZONTAL, 1, 3, 0.2, 0.2, 1, false);
 

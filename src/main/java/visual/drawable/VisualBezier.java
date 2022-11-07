@@ -1,6 +1,7 @@
-package visual;
+package visual.drawable;
 
 import geometry.Bezier;
+import visual.scheme.IScheme;
 
 public class VisualBezier extends VisualCurve {
 
@@ -18,6 +19,6 @@ public class VisualBezier extends VisualCurve {
                     getPoint(((double)(i + 1))/pointsCount)
             );
         }
-        scheme.drawEndPoint(getPoint(1), getPoint(0.95));
+        scheme.drawEndPoint(getPoint(1));
     }
 }

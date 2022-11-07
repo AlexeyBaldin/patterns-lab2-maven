@@ -1,4 +1,4 @@
-package visual;
+package visual.drawable;
 
 import geometry.ICurve;
 import geometry.IPoint;

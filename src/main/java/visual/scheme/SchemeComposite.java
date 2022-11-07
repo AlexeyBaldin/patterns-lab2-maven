@@ -1,7 +1,6 @@
-package visual.swing;
+package visual.scheme;
 
 import geometry.IPoint;
-import visual.IScheme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +24,8 @@ public class SchemeComposite implements IScheme {
     }
 
     @Override
-    public void drawEndPoint(IPoint point, IPoint prevPoint) {
-        schemes.forEach(scheme -> scheme.drawEndPoint(point, prevPoint));
+    public void drawEndPoint(IPoint point) {
+        schemes.forEach(scheme -> scheme.drawEndPoint(point));
     }
+
 }
