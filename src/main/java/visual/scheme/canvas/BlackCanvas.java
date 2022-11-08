@@ -1,6 +1,9 @@
 package visual.scheme.canvas;
 
+import geometry.ICurve;
 import geometry.IPointBase;
+import geometry.strategy.LengthStrategy;
+import geometry.strategy.TStrategy;
 import visual.scheme.IScheme;
 
 import java.awt.*;
@@ -46,4 +49,5 @@ public class BlackCanvas extends Canvas implements IScheme {
         Graphics graphics = this.getGraphics();
         graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
     }
+
 }

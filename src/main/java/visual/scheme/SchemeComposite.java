@@ -1,5 +1,6 @@
 package visual.scheme;
 
+import geometry.ICurve;
 import geometry.IPointBase;
 
 import java.util.ArrayList;

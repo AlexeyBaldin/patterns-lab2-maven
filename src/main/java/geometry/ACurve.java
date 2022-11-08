@@ -1,5 +1,8 @@
 package geometry;
 
+import geometry.strategy.LengthStrategy;
+import geometry.strategy.TStrategy;
+
 public abstract class ACurve implements ICurve {
 
     private final IPointBase a;
@@ -16,5 +19,6 @@ public abstract class ACurve implements ICurve {
     }
 
     protected abstract IPointBase doGetPoint(double t, IPointBase a, IPointBase b);
+
 
 }

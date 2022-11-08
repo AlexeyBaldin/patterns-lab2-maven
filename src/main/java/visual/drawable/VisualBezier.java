@@ -1,5 +1,6 @@
 package visual.drawable;
 
+import geometry.ACurve;
 import geometry.Bezier;
 import visual.scheme.IScheme;
 
