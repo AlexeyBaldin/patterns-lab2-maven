@@ -1,9 +1,9 @@
 package visual.scheme;
 
-import geometry.IPoint;
+import geometry.IPointBase;
 
 public interface IScheme {
-    void drawStartPoint(IPoint point);
-    void drawLine(IPoint point, IPoint point1);
-    void drawEndPoint(IPoint point);
+    void drawStartPoint(IPointBase point);
+    void drawLine(IPointBase point, IPointBase point1);
+    void drawEndPoint(IPointBase point);
 }

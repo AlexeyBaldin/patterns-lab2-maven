@@ -1,23 +1,22 @@
 package visual.scheme.canvas;
 
-import geometry.IPoint;
+import geometry.IPointBase;
 import visual.scheme.IScheme;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class BlackCanvas extends Canvas implements IScheme {
 
     private final int radius = 10;
 
     @Override
-    public void drawStartPoint(IPoint point) {
+    public void drawStartPoint(IPointBase point) {
         Graphics graphics = this.getGraphics();
         graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
     }
 
     @Override
-    public void drawLine(IPoint point, IPoint point1) {
+    public void drawLine(IPointBase point, IPointBase point1) {
 
         Graphics graphics = this.getGraphics();
 
@@ -43,7 +42,7 @@ public class BlackCanvas extends Canvas implements IScheme {
     }
 
     @Override
-    public void drawEndPoint(IPoint point) {
+    public void drawEndPoint(IPointBase point) {
         Graphics graphics = this.getGraphics();
         graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
     }

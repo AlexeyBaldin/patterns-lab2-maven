@@ -1,28 +1,29 @@
 package visual.scheme.svg;
 
 import geometry.IPoint;
+import geometry.IPointBase;
 import visual.scheme.IScheme;
 
 public class GreenSVG extends SVG implements IScheme {
 
     boolean isMarkerAdd = false;
 
-    private IPoint arrowPoint;
+    private IPointBase arrowPoint;
 
     @Override
-    public void drawStartPoint(IPoint point) {
+    public void drawStartPoint(IPointBase point) {
         svgString += "<circle fill=\"rgb(0,255,0)\" cx=\"" + point.getX() + "\" cy=\"" + point.getY() + "\" r=\"" + radius/2 + "\" />\n";
     }
 
     @Override
-    public void drawLine(IPoint point, IPoint point1) {
+    public void drawLine(IPointBase point, IPointBase point1) {
         svgString += "<line x1=\"" + point.getX() + "\"  y1=\"" + point.getY() +
                 "\" x2=\"" + point1.getX() + "\" y2=\"" + point1.getY() + "\" style=\"stroke:rgb(0,255,0);stroke-width:0.3\" />\n";
         arrowPoint = point;
     }
 
     @Override
-    public void drawEndPoint(IPoint point) {
+    public void drawEndPoint(IPointBase point) {
         if(!isMarkerAdd) {
             svgString += "<marker\n" +
                     "      id=\"arrow\"\n" +
