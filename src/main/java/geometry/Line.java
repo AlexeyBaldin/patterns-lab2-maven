@@ -2,7 +2,7 @@ package geometry;
 
 public class Line extends ACurve {
 
-    public Line(IPoint a, IPoint b) {
+    public Line(IPointBase a, IPointBase b) {
         super(a, b);
     }
 

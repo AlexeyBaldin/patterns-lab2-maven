@@ -2,10 +2,10 @@ package geometry;
 
 public abstract class ACurve implements ICurve {
 
-    private final IPoint a;
-    private final IPoint b;
+    private final IPointBase a;
+    private final IPointBase b;
 
-    public ACurve(IPoint a, IPoint b) {
+    public ACurve(IPointBase a, IPointBase b) {
         this.a = a;
         this.b = b;
     }

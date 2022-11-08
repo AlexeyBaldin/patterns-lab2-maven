@@ -2,10 +2,10 @@ package geometry;
 
 public class Bezier extends ACurve {
 
-    private final IPoint c;
-    private final IPoint d;
+    private final IPointBase c;
+    private final IPointBase d;
 
-    public Bezier(IPoint a, IPoint b, IPoint c, IPoint d) {
+    public Bezier(IPointBase a, IPointBase b, IPointBase c, IPointBase d) {
         super(a, b);
         this.c = c;
         this.d = d;

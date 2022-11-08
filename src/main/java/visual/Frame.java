@@ -3,6 +3,7 @@ package visual;
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
+import visual.drawable.DrawableComposite;
 import visual.drawable.VisualBezier;
 import visual.drawable.VisualLine;
 import visual.scheme.canvas.BlackCanvas;
@@ -62,37 +63,64 @@ public class Frame extends JFrame {
             String input = scanner.next();
             switch (input.toLowerCase()) {
                 case "line":
-                    System.out.print("Line coordinates: ");
-                    int x1 = scanner.nextInt();
-                    int y1 = scanner.nextInt();
-                    int x2 = scanner.nextInt();
-                    int y2 = scanner.nextInt();
-                    new VisualLine(new Line(
-                            new Point(x1, y1),
-                            new Point(x2, y2)
+//                    System.out.print("Line coordinates: ");
+//                    int x1 = scanner.nextInt();
+//                    int y1 = scanner.nextInt();
+//                    int x2 = scanner.nextInt();
+//                    int y2 = scanner.nextInt();
+//                    new VisualLine(new Line(
+//                            new Point(x1, y1),
+//                            new Point(x2, y2)
+//                    )).draw(schemeComposite);
+
+                    new DrawableComposite(
+                            new VisualLine(new Line(
+                                    new Point(100, 100),
+                                    new Point(200, 200)
+                            )),
+                            new VisualLine(new Line(
+                                    new Point(100, 200),
+                                    new Point(200, 100)
+                            )
                     )).draw(schemeComposite);
+
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
 
                     break;
                 case "bezier":
-                    System.out.print("Bezier coordinates: ");
-                    int x1b = scanner.nextInt();
-                    int y1b = scanner.nextInt();
-                    int x2b = scanner.nextInt();
-                    int y2b = scanner.nextInt();
-                    int x3b = scanner.nextInt();
-                    int y3b = scanner.nextInt();
-                    int x4b = scanner.nextInt();
-                    int y4b = scanner.nextInt();
+//                    System.out.print("Bezier coordinates: ");
+//                    int x1b = scanner.nextInt();
+//                    int y1b = scanner.nextInt();
+//                    int x2b = scanner.nextInt();
+//                    int y2b = scanner.nextInt();
+//                    int x3b = scanner.nextInt();
+//                    int y3b = scanner.nextInt();
+//                    int x4b = scanner.nextInt();
+//                    int y4b = scanner.nextInt();
+//
+//                    new VisualBezier(new Bezier(
+//                            new Point(x1b, y1b),
+//                            new Point(x2b, y2b),
+//                            new Point(x3b, y3b),
+//                            new Point(x4b, y4b)
+//                    )).draw(schemeComposite);
 
-                    new VisualBezier(new Bezier(
-                            new Point(x1b, y1b),
-                            new Point(x2b, y2b),
-                            new Point(x3b, y3b),
-                            new Point(x4b, y4b)
-                    )).draw(schemeComposite);
+                    new DrawableComposite(
+                            new VisualBezier(new Bezier(
+                                    new Point(100, 100),
+                                    new Point(300, 300),
+                                    new Point(120, 150),
+                                    new Point(280, 250)
+                            )),
+                            new VisualBezier(new Bezier(
+                                    new Point(100, 300),
+                                    new Point(300, 100),
+                                    new Point(120, 250),
+                                    new Point(280, 150)
+                            )
+                            )).draw(schemeComposite);
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
