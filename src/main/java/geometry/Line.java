@@ -11,7 +11,7 @@ public class Line extends ACurve {
     }
 
     @Override
-    public IPoint doGetPoint(double t, IPointBase a, IPointBase b) {
+    public IPointBase doGetPoint(double t, IPointBase a, IPointBase b) {
         return new Point(calculateLine(a.getX(), b.getX(), t),
                 calculateLine(a.getY(), b.getY(), t));
     }

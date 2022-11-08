@@ -19,7 +19,7 @@ public class Bezier extends ACurve {
     }
 
     @Override
-    public IPoint doGetPoint(double t, IPointBase a, IPointBase b) {
+    public IPointBase doGetPoint(double t, IPointBase a, IPointBase b) {
         return new Point(calculateBezier(a.getX(), c.getX(), d.getX(), b.getX(), t),
                 calculateBezier(a.getY(), c.getY(), d.getY(), b.getY(), t));
     }

@@ -11,10 +11,10 @@ public abstract class ACurve implements ICurve {
     }
 
     @Override
-    public final IPoint getPoint(double t) {
+    public final IPointBase getPoint(double t) {
         return doGetPoint(t, a, b);
     }
 
-    protected abstract IPoint doGetPoint(double t, IPointBase a, IPointBase b);
+    protected abstract IPointBase doGetPoint(double t, IPointBase a, IPointBase b);
 
 }

@@ -1,7 +1,7 @@
 package visual.drawable;
 
 import geometry.ICurve;
-import geometry.IPoint;
+import geometry.IPointBase;
 
 public abstract class VisualCurve implements ICurve, IDrawable {
 
@@ -12,7 +12,7 @@ public abstract class VisualCurve implements ICurve, IDrawable {
     }
 
     @Override
-    public final IPoint getPoint(double t) {
+    public final IPointBase getPoint(double t) {
         return this.curve.getPoint(t);
     }
 
