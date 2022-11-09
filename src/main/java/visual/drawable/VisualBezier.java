@@ -2,6 +2,7 @@ package visual.drawable;
 
 import geometry.ACurve;
 import geometry.Bezier;
+import geometry.Util;
 import visual.scheme.IScheme;
 
 public class VisualBezier extends VisualCurve {
@@ -21,5 +22,6 @@ public class VisualBezier extends VisualCurve {
             );
         }
         scheme.drawEndPoint(getPoint(1));
+        scheme.drawCenterPoint(Util.getCenterPoint(this));
     }
 }

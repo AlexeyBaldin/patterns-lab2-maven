@@ -42,4 +42,9 @@ public class GreenSVG extends SVG implements IScheme {
         svgString += "<line x1=\"" + arrowPoint.getX() + "\"  y1=\"" + arrowPoint.getY() +
                 "\" x2=\"" + point.getX() + "\" y2=\"" + point.getY() + "\" style=\"stroke:rgb(0,255,0);stroke-width:0.3\" marker-end=\"url(#arrow)\" />\n";
     }
+
+    @Override
+    public void drawCenterPoint(IPointBase point) {
+        this.drawStartPoint(point);
+    }
 }

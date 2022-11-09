@@ -21,4 +21,9 @@ public class BlackSVG extends SVG implements IScheme {
     public void drawEndPoint(IPointBase point) {
         svgString += "<rect fill=\"black\" x=\"" + (point.getX() - radius/2) + "\" y=\"" + (point.getY() - radius/2) + "\" width=\"" + radius + "\" height=\"" + radius + "\" />\n";
     }
+
+    @Override
+    public void drawCenterPoint(IPointBase point) {
+        this.drawStartPoint(point);
+    }
 }

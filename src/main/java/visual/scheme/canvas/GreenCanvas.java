@@ -56,5 +56,10 @@ public class GreenCanvas extends Canvas implements IScheme {
         }
     }
 
+    @Override
+    public void drawCenterPoint(IPointBase point) {
+        this.drawStartPoint(point);
+    }
+
 
 }

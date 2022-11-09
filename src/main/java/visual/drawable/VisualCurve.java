@@ -16,4 +16,5 @@ public abstract class VisualCurve implements ICurve, IDrawable {
         return this.curve.getPoint(t);
     }
 
+
 }

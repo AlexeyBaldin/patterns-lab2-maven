@@ -29,11 +29,5 @@ public class Main extends JFrame {
 
     }
 
-//    public final IPointBase getCenterPoint() {
-//        TStrategy tStrategy = new TStrategy();
-//        LengthStrategy lengthStrategy = new LengthStrategy();
-//        double length = lengthStrategy.calculate(this, 1);
-//        double t = tStrategy.calculate(this, length/2);
-//        return this.getPoint(t);
-//    }
+
 }

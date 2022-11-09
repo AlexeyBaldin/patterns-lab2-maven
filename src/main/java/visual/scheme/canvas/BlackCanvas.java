@@ -50,4 +50,9 @@ public class BlackCanvas extends Canvas implements IScheme {
         graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
     }
 
+    @Override
+    public void drawCenterPoint(IPointBase point) {
+        this.drawStartPoint(point);
+    }
+
 }
