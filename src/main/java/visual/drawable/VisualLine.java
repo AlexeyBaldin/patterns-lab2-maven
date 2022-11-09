@@ -1,13 +1,13 @@
 package visual.drawable;
 
+import geometry.ICurve;
 import geometry.Line;
 import geometry.Util;
 import visual.scheme.IScheme;
 
 public class VisualLine extends VisualCurve {
-
-    public VisualLine(Line line) {
-        super(line);
+    public VisualLine(ICurve curve) {
+        super(curve);
     }
 
     @Override

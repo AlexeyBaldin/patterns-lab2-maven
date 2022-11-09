@@ -1,5 +1,6 @@
 import geometry.Bezier;
 import geometry.IPointBase;
+import geometry.decorator.Fragment;
 import geometry.strategy.LengthStrategy;
 import geometry.strategy.StrategyCalculator;
 import geometry.Line;
@@ -25,8 +26,6 @@ public class Main extends JFrame {
 //
 //        System.out.println(lengthStrategy.calculate(bezier, 0.5));
 //        System.out.println(lengthStrategy.calculate(bezier, 1));
-
-
     }
 
 

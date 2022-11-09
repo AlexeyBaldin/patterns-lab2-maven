@@ -3,8 +3,10 @@ package visual;
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
+import geometry.decorator.MoveTo;
 import visual.drawable.DrawableComposite;
 import visual.drawable.VisualBezier;
+import visual.drawable.VisualCurve;
 import visual.drawable.VisualLine;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
@@ -72,6 +74,13 @@ public class Frame extends JFrame {
                             new Point(x1, y1),
                             new Point(x2, y2)
                     )).draw(schemeComposite);
+
+                    ICurve moveTo = new MoveTo(new Line(
+                            new Point(x1, y1),
+                            new Point(x2, y2)
+                    ), new Point(100, 200));
+
+                    new VisualLine(moveTo).draw(schemeComposite);
 
 //                    new DrawableComposite(
 //                            new VisualLine(new Line(
