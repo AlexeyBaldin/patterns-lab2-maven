@@ -16,8 +16,8 @@ public abstract class StrategyCalculator {
 
             t = (i+1) / pointsCount;
             length += Math.sqrt(Math.pow(point.getX() - point1.getX(), 2) + Math.pow(point.getY() - point1.getY(), 2));
-            double done = checkDone(parameter, length, t);
-            if(done != -1) {
+            Double done = checkDone(parameter, length, t);
+            if(done != null) {
                 return done;
             }
         }
@@ -25,5 +25,5 @@ public abstract class StrategyCalculator {
         return -1;
     }
 
-    abstract protected double checkDone(double parameter, double length, double t);
+    abstract protected Double checkDone(double parameter, double length, double t);
 }

@@ -3,6 +3,7 @@ package visual;
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
+import geometry.decorator.Fragment;
 import geometry.decorator.MoveTo;
 import visual.drawable.DrawableComposite;
 import visual.drawable.VisualBezier;
@@ -70,15 +71,15 @@ public class Frame extends JFrame {
                     int y1 = scanner.nextInt();
                     int x2 = scanner.nextInt();
                     int y2 = scanner.nextInt();
-                    new VisualLine(new Line(
-                            new Point(x1, y1),
-                            new Point(x2, y2)
-                    )).draw(schemeComposite);
+//                    new VisualLine(new Line(
+//                            new Point(x1, y1),
+//                            new Point(x2, y2)
+//                    )).draw(schemeComposite);
 
-                    ICurve moveTo = new MoveTo(new Line(
+                    ICurve moveTo = new Fragment(new Line(
                             new Point(x1, y1),
                             new Point(x2, y2)
-                    ), new Point(100, 200));
+                    ), 1, 0);
 
                     new VisualLine(moveTo).draw(schemeComposite);
 
