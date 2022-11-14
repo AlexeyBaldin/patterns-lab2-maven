@@ -2,15 +2,20 @@ package visual.scheme.canvas;
 
 import geometry.IPoint;
 import geometry.IPointBase;
+import visual.drawable.DrawableComposite;
 import visual.scheme.IScheme;
 
 import java.awt.*;
 
-public class GreenCanvas extends Canvas implements IScheme {
+public class GreenCanvas extends ACanvas {
 
     private final int radius = 10;
 
     private IPointBase arrowPoint;
+
+    public GreenCanvas(DrawableComposite drawableComposite) {
+        super(drawableComposite);
+    }
 
     @Override
     public void drawStartPoint(IPointBase point) {
@@ -50,7 +55,6 @@ public class GreenCanvas extends Canvas implements IScheme {
                     y1 + (int) (headLength * Math.sin(angle - radians)) };
             graphics.fillPolygon(xs, ys, 3);
 
-            System.out.println(point);
         } else {
             graphics.drawOval((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
         }

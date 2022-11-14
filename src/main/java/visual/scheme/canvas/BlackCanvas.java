@@ -4,13 +4,18 @@ import geometry.ICurve;
 import geometry.IPointBase;
 import geometry.strategy.LengthStrategy;
 import geometry.strategy.TStrategy;
+import visual.drawable.DrawableComposite;
 import visual.scheme.IScheme;
 
 import java.awt.*;
 
-public class BlackCanvas extends Canvas implements IScheme {
+public class BlackCanvas extends ACanvas {
 
     private final int radius = 10;
+
+    public BlackCanvas(DrawableComposite drawableComposite) {
+        super(drawableComposite);
+    }
 
     @Override
     public void drawStartPoint(IPointBase point) {

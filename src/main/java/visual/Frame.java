@@ -1,14 +1,12 @@
 package visual;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
 import geometry.decorator.Fragment;
 import geometry.decorator.MoveTo;
-import visual.drawable.DrawableComposite;
-import visual.drawable.VisualBezier;
-import visual.drawable.VisualCurve;
-import visual.drawable.VisualLine;
+import visual.drawable.*;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
 import visual.scheme.IScheme;
@@ -18,11 +16,14 @@ import visual.scheme.svg.GreenSVG;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Scanner;
 
 public class Frame extends JFrame {
 
     private final IScheme schemeComposite;
+    private final DrawableComposite drawableComposite = new DrawableComposite();
     private final Scanner scanner = new Scanner(System.in);
 
     private void addComponentToFrame(Component component, int fill, int gridx, int gridy, double weightx, double weighty, int gridwidth, boolean isCanvas) {
@@ -41,8 +42,8 @@ public class Frame extends JFrame {
 
     public Frame() {
 
-        GreenCanvas greenCanvas = new GreenCanvas();
-        BlackCanvas blackCanvas = new BlackCanvas();
+        GreenCanvas greenCanvas = new GreenCanvas(this.drawableComposite);
+        BlackCanvas blackCanvas = new BlackCanvas(this.drawableComposite);
         GreenSVG greenSVG = new GreenSVG();
         BlackSVG blackSVG = new BlackSVG();
 
@@ -50,7 +51,6 @@ public class Frame extends JFrame {
 
         setSize(800, 800);
         this.setLayout(new GridBagLayout());
-        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton generateButton = new JButton("Generate curve");
@@ -60,6 +60,15 @@ public class Frame extends JFrame {
 
         JButton swgTwoButton = new JButton("Save Scheme 2 in SVG");
         swgTwoButton.setEnabled(false);
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                blackCanvas.setSize(getWidth() / 2, getHeight() / 2);
+                greenCanvas.setSize(getWidth() / 2, getHeight() / 2);
+            }
+        });
+
 
         generateButton.addActionListener(e -> {
             System.out.print("Action(Line|Bezier): ");
@@ -76,12 +85,15 @@ public class Frame extends JFrame {
 //                            new Point(x2, y2)
 //                    )).draw(schemeComposite);
 
-                    ICurve moveTo = new Fragment(new Line(
+                    ICurve fragment = new Fragment(new Line(
                             new Point(x1, y1),
                             new Point(x2, y2)
                     ), 1, 0);
 
-                    new VisualLine(moveTo).draw(schemeComposite);
+                    this.drawableComposite.add(new VisualLine(fragment));
+                    this.drawableComposite.draw(schemeComposite);
+
+                    System.out.println(blackCanvas.getSize());
 
 //                    new DrawableComposite(
 //                            new VisualLine(new Line(
@@ -110,12 +122,14 @@ public class Frame extends JFrame {
                     int x4b = scanner.nextInt();
                     int y4b = scanner.nextInt();
 
-                    new VisualBezier(new Bezier(
+                    this.drawableComposite.add(new VisualBezier(new Bezier(
                             new Point(x1b, y1b),
                             new Point(x2b, y2b),
                             new Point(x3b, y3b),
                             new Point(x4b, y4b)
-                    )).draw(schemeComposite);
+                    )));
+
+                    this.drawableComposite.draw(schemeComposite);
 
 //                    new DrawableComposite(
 //                            new VisualBezier(new Bezier(

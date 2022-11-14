@@ -1,8 +1,8 @@
 package geometry.strategy;
 
-public class TStrategy extends StrategyCalculator {
+public class TStrategy implements IStrategy {
     @Override
-    protected Double checkDone(double parameter, double length, double t) {
+    public Double checkDone(double parameter, double length, double t) {
         if(Math.abs(parameter - length) < 1) {
             return t;
         }

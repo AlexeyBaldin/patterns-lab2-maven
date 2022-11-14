@@ -3,9 +3,9 @@ package geometry.strategy;
 import geometry.ICurve;
 import geometry.IPointBase;
 
-public abstract class StrategyCalculator {
+public class StrategyCalculator {
 
-    public final double calculate(ICurve curve, double parameter) {
+    public static double calculate(ICurve curve, double parameter, IStrategy strategy) {
         double length = 0;
         double t = 0;
 
@@ -16,7 +16,7 @@ public abstract class StrategyCalculator {
 
             t = (i+1) / pointsCount;
             length += Math.sqrt(Math.pow(point.getX() - point1.getX(), 2) + Math.pow(point.getY() - point1.getY(), 2));
-            Double done = checkDone(parameter, length, t);
+            Double done = strategy.checkDone(parameter, length, t);
             if(done != null) {
                 return done;
             }
@@ -25,5 +25,4 @@ public abstract class StrategyCalculator {
         return -1;
     }
 
-    abstract protected Double checkDone(double parameter, double length, double t);
 }
