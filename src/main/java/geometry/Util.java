@@ -6,7 +6,6 @@ import geometry.strategy.StrategyCalculator;
 import geometry.strategy.TStrategy;
 
 public class Util {
-
     public static IPointBase getCenterPoint(ICurve curve) {
         IStrategy tStrategy = new TStrategy();
         IStrategy lengthStrategy = new LengthStrategy();

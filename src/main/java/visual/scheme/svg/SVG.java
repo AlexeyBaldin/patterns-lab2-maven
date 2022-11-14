@@ -16,7 +16,7 @@ public abstract class SVG implements ISVG {
 
     protected String svgString = SVG_START;
 
-    protected final int radius = 10;
+    protected final int radius = 6;
 
     public void flush(String filename) {
         try(FileWriter writer = new FileWriter(filename + ".svg", false)) {

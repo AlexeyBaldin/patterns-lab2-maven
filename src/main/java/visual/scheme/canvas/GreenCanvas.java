@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class GreenCanvas extends ACanvas {
 
-    private final int radius = 10;
+    private final int radius = 6;
 
     private IPointBase arrowPoint;
 

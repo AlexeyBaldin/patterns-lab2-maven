@@ -71,7 +71,7 @@ public class Frame extends JFrame {
 
 
         generateButton.addActionListener(e -> {
-            System.out.print("Action(Line|Bezier): ");
+            System.out.print("Action(Line|Bezier|Demo): ");
             String input = scanner.next();
             switch (input.toLowerCase()) {
                 case "line":
@@ -80,32 +80,12 @@ public class Frame extends JFrame {
                     int y1 = scanner.nextInt();
                     int x2 = scanner.nextInt();
                     int y2 = scanner.nextInt();
-//                    new VisualLine(new Line(
-//                            new Point(x1, y1),
-//                            new Point(x2, y2)
-//                    )).draw(schemeComposite);
 
-                    ICurve fragment = new Fragment(new Line(
+                    this.drawableComposite.add(new VisualLine(new Line(
                             new Point(x1, y1),
                             new Point(x2, y2)
-                    ), 1, 0);
-
-                    this.drawableComposite.add(new VisualLine(fragment));
+                    )));
                     this.drawableComposite.draw(schemeComposite);
-
-                    System.out.println(blackCanvas.getSize());
-
-//                    new DrawableComposite(
-//                            new VisualLine(new Line(
-//                                    new Point(100, 100),
-//                                    new Point(200, 200)
-//                            )),
-//                            new VisualLine(new Line(
-//                                    new Point(100, 200),
-//                                    new Point(200, 100)
-//                            )
-//                    )).draw(schemeComposite);
-
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
@@ -131,24 +111,26 @@ public class Frame extends JFrame {
 
                     this.drawableComposite.draw(schemeComposite);
 
-//                    new DrawableComposite(
-//                            new VisualBezier(new Bezier(
-//                                    new Point(100, 100),
-//                                    new Point(300, 300),
-//                                    new Point(120, 150),
-//                                    new Point(280, 250)
-//                            )),
-//                            new VisualBezier(new Bezier(
-//                                    new Point(100, 300),
-//                                    new Point(300, 100),
-//                                    new Point(120, 250),
-//                                    new Point(280, 150)
-//                            )
-//                            )).draw(schemeComposite);
-
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
 
+                    break;
+                case "demo":
+
+                    ICurve roll = new Fragment(new Line(new Point(100, 100), new Point(200, 100)),
+                            1, 0);
+                    this.drawableComposite.add(new VisualLine(roll));
+
+                    ICurve fragment = new Fragment(new Line(new Point(100, 200), new Point(200, 200)), 0, 0.5);
+                    ICurve moveFragment = new MoveTo(fragment, new Point(150, 250));
+                    this.drawableComposite.add(new VisualLine(moveFragment));
+
+                    ICurve fragment1 = new Fragment(new Line(new Point(100, 300), new Point(200, 350)),
+                            1, 0);
+                    ICurve moveFragment1 = new MoveTo(fragment1, new Point(150, 250));
+                    this.drawableComposite.add(new VisualLine(moveFragment1));
+
+                    this.drawableComposite.draw(schemeComposite);
                     break;
                 default:
                     System.out.println("Unknown command!");
