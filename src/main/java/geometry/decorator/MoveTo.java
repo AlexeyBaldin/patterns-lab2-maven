@@ -9,7 +9,7 @@ public class MoveTo implements ICurve {
 
     private final ICurve curve;
     private final IPointBase point;
-    private final IPointBase oldStartPoint;
+    private IPointBase oldStartPoint;
 
     public MoveTo(ICurve curve, IPointBase point) {
         this.curve = curve;
@@ -19,6 +19,7 @@ public class MoveTo implements ICurve {
 
     @Override
     public IPointBase getPoint(double t) {
+        this.oldStartPoint = curve.getPoint(0);
         IPointBase pointBase = curve.getPoint(t);
         return new Point(point.getX() + pointBase.getX() - oldStartPoint.getX(), point.getY() + pointBase.getY() - oldStartPoint.getY());
     }

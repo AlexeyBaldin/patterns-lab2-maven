@@ -21,7 +21,6 @@ public class BlackCanvas extends ACanvas {
     public void drawStartPoint(IPointBase point) {
         Graphics graphics = this.getGraphics();
         graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
-        System.out.println(point);
     }
 
     @Override

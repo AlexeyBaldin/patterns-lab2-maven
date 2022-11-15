@@ -117,18 +117,18 @@ public class Frame extends JFrame {
                     break;
                 case "demo":
 
-                    ICurve roll = new Fragment(new Line(new Point(100, 100), new Point(200, 100)),
-                            1, 0);
-                    this.drawableComposite.add(new VisualLine(roll));
 
-                    ICurve fragment = new Fragment(new Line(new Point(100, 200), new Point(200, 200)), 0, 0.5);
-                    ICurve moveFragment = new MoveTo(fragment, new Point(150, 250));
-                    this.drawableComposite.add(new VisualLine(moveFragment));
+                    Line line = new Line(new Point(100, 100), new Point(100, 300));
 
-                    ICurve fragment1 = new Fragment(new Line(new Point(100, 300), new Point(200, 350)),
-                            1, 0);
-                    ICurve moveFragment1 = new MoveTo(fragment1, new Point(150, 250));
-                    this.drawableComposite.add(new VisualLine(moveFragment1));
+                    ICurve fragment = new Fragment(line, 0, 0.3);
+                    ICurve fragment2 = new Fragment(line, 0.7, 1);
+
+                    ICurve moveTo = new MoveTo(fragment2, fragment.getPoint(1));
+
+                    this.drawableComposite.add(new VisualCurve(fragment), new VisualCurve(moveTo));
+
+
+
 
                     this.drawableComposite.draw(schemeComposite);
                     break;

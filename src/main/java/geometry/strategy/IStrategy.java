@@ -1,5 +1,5 @@
 package geometry.strategy;
 
 public interface IStrategy {
-    Double checkDone(double parameter, double length, double t);
+    Double stopper(double parameter, double length, double t);
 }

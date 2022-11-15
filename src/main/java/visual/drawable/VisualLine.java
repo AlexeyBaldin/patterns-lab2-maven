@@ -6,7 +6,7 @@ import geometry.Util;
 import visual.scheme.IScheme;
 
 public class VisualLine extends VisualCurve {
-    public VisualLine(ICurve curve) {
+    public VisualLine(Line curve) {
         super(curve);
     }
 
