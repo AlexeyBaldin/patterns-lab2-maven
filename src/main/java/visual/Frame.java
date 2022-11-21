@@ -1,11 +1,8 @@
 package visual;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import geometry.*;
 import geometry.Line;
 import geometry.Point;
-import geometry.decorator.Fragment;
-import geometry.decorator.MoveTo;
 import visual.drawable.*;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
@@ -20,6 +17,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Frame extends JFrame {
 
@@ -131,6 +129,15 @@ public class Frame extends JFrame {
                     for (IDrawable drawable : this.drawableComposite) {
                         drawable.draw(schemeComposite);
                     }
+
+                    Iterator<IDrawable> iterator = this.drawableComposite.iterator();
+                    int counter = 0;
+                    while(iterator.hasNext()) {
+                        iterator.next();
+                        counter++;
+                    }
+                    System.out.println("Number of curves: " + counter);
+
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
