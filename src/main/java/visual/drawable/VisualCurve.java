@@ -32,7 +32,4 @@ public class VisualCurve implements ICurve, IDrawable {
         scheme.drawCenterPoint(Util.getCenterPoint(this));
     }
 
-
-
-
 }

@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -137,7 +138,6 @@ public class Frame extends JFrame {
                         counter++;
                     }
                     System.out.println("Number of curves: " + counter);
-
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
