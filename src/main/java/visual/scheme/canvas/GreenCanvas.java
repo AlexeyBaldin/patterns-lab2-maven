@@ -64,6 +64,4 @@ public class GreenCanvas extends ACanvas {
     public void drawCenterPoint(IPointBase point) {
         this.drawStartPoint(point);
     }
-
-
 }

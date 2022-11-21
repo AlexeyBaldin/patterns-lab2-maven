@@ -33,4 +33,6 @@ public class VisualCurve implements ICurve, IDrawable {
     }
 
 
+
+
 }

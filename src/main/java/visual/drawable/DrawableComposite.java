@@ -2,10 +2,9 @@ package visual.drawable;
 
 import visual.scheme.IScheme;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
-public class DrawableComposite implements IDrawable{
+public class DrawableComposite implements IDrawable, Iterable<IDrawable> {
     private final ArrayList<IDrawable> drawables = new ArrayList<>();
 
     public DrawableComposite(IDrawable ...drawables) {
@@ -17,12 +16,51 @@ public class DrawableComposite implements IDrawable{
         this.drawables.addAll(Arrays.asList(drawables));
     }
 
-    public void clear() {
-        this.drawables.clear();
-    }
-
     @Override
     public void draw(IScheme scheme) {
         drawables.forEach(drawable -> drawable.draw(scheme));
+    }
+
+    private static class DrawableIterator implements Iterator<IDrawable> {
+        private final ArrayList<IDrawable> d = new ArrayList<>();
+
+        private int cursor = 0;
+        DrawableIterator(DrawableComposite drawableComposite) {
+            fill(drawableComposite);
+            if(d.size() == 0) {
+                throw new NoSuchElementException();
+            }
+        }
+
+        private void fill(IDrawable drawable) {
+            if(drawable instanceof DrawableComposite) {
+                for (IDrawable iD :
+                        ((DrawableComposite) drawable).drawables) {
+                    fill(iD);
+                }
+            } else {
+                d.add(drawable);
+            }
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return cursor < d.size();
+        }
+
+        @Override
+        public IDrawable next() {
+           return d.get(cursor++);
+        }
+
+        public void reset() {
+            cursor = 0;
+        }
+    }
+
+    @Override
+    public Iterator<IDrawable> iterator() {
+        return new DrawableIterator(this);
     }
 }

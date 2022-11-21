@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Frame extends JFrame {
@@ -71,8 +72,9 @@ public class Frame extends JFrame {
 
 
         generateButton.addActionListener(e -> {
-            System.out.print("Action(Line|Bezier|Demo): ");
-            String input = scanner.next();
+            //System.out.print("Action(Line|Bezier|Demo): ");
+            //String input = scanner.next();
+            String input = "demo";
             switch (input.toLowerCase()) {
                 case "line":
                     System.out.print("Line coordinates: ");
@@ -119,18 +121,19 @@ public class Frame extends JFrame {
 
 
                     Line line = new Line(new Point(100, 100), new Point(100, 300));
+                    Line line2 = new Line(new Point(200, 100), new Point(200, 300));
+                    Bezier bezier = new Bezier(new Point(100, 350), new Point(300, 350), new Point(130, 330), new Point(270, 380));
 
-                    ICurve fragment = new Fragment(line, 0, 0.3);
-                    ICurve fragment2 = new Fragment(line, 0.7, 1);
+                    DrawableComposite testComposite = new DrawableComposite(new VisualLine(line), new VisualLine(line2));
 
-                    ICurve moveTo = new MoveTo(fragment2, fragment.getPoint(1));
+                    this.drawableComposite.add(testComposite, new VisualBezier(bezier));
 
-                    this.drawableComposite.add(new VisualCurve(fragment), new VisualCurve(moveTo));
+                    for (IDrawable drawable : this.drawableComposite) {
+                        drawable.draw(schemeComposite);
+                    }
 
-
-
-
-                    this.drawableComposite.draw(schemeComposite);
+                    swgOneButton.setEnabled(true);
+                    swgTwoButton.setEnabled(true);
                     break;
                 default:
                     System.out.println("Unknown command!");
