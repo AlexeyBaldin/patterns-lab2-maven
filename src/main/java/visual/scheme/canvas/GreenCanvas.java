@@ -1,9 +1,8 @@
 package visual.scheme.canvas;
 
-import geometry.IPoint;
 import geometry.IPointBase;
-import visual.drawable.DrawableComposite;
-import visual.scheme.IScheme;
+import visual.drawable.DrawableCompositeOld;
+import visual.drawable.innerIterator.DrawableComposite;
 
 import java.awt.*;
 

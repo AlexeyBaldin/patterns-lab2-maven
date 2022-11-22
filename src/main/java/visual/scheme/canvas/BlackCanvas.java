@@ -1,11 +1,7 @@
 package visual.scheme.canvas;
 
-import geometry.ICurve;
 import geometry.IPointBase;
-import geometry.strategy.LengthStrategy;
-import geometry.strategy.TStrategy;
-import visual.drawable.DrawableComposite;
-import visual.scheme.IScheme;
+import visual.drawable.innerIterator.DrawableComposite;
 
 import java.awt.*;
 

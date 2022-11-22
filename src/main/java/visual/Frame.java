@@ -4,6 +4,7 @@ import geometry.*;
 import geometry.Line;
 import geometry.Point;
 import visual.drawable.*;
+import visual.drawable.innerIterator.DrawableComposite;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
 import visual.scheme.IScheme;
@@ -15,8 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -127,17 +126,14 @@ public class Frame extends JFrame {
 
                     this.drawableComposite.add(testComposite, new VisualBezier(bezier));
 
-                    for (IDrawable drawable : this.drawableComposite) {
-                        drawable.draw(schemeComposite);
-                    }
-
-                    Iterator<IDrawable> iterator = this.drawableComposite.iterator();
-                    int counter = 0;
-                    while(iterator.hasNext()) {
-                        iterator.next();
-                        counter++;
-                    }
+                    AtomicInteger counter = new AtomicInteger();
+                    this.drawableComposite.iterate((iterable) -> {
+                        counter.getAndIncrement();
+                        System.out.println(iterable);
+                    });
                     System.out.println("Number of curves: " + counter);
+
+
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);

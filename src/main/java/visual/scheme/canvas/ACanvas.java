@@ -1,6 +1,7 @@
 package visual.scheme.canvas;
 
-import visual.drawable.DrawableComposite;
+import visual.drawable.DrawableCompositeOld;
+import visual.drawable.innerIterator.DrawableComposite;
 import visual.scheme.IScheme;
 
 import java.awt.*;

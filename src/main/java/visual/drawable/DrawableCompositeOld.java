@@ -4,10 +4,10 @@ import visual.scheme.IScheme;
 
 import java.util.*;
 
-public class DrawableComposite implements IDrawable, Iterable<IDrawable> {
+public class DrawableCompositeOld implements IDrawable, Iterable<IDrawable> {
     private final ArrayList<IDrawable> drawables = new ArrayList<>();
 
-    public DrawableComposite(IDrawable... drawables) {
+    public DrawableCompositeOld(IDrawable... drawables) {
         this.drawables.addAll(Arrays.asList(drawables));
     }
 
@@ -24,25 +24,25 @@ public class DrawableComposite implements IDrawable, Iterable<IDrawable> {
 
 
     private static class DrawableIterator implements Iterator<IDrawable> {
-        private final DrawableComposite owner;
+        private final DrawableCompositeOld owner;
         private final ArrayList<IDrawable> d;
 
         private int cursor = 0;
         private int count = 0;
 
-        DrawableIterator(DrawableComposite drawableComposite) {
-            this.owner = drawableComposite;
+        DrawableIterator(DrawableCompositeOld drawableCompositeOld) {
+            this.owner = drawableCompositeOld;
             this.d = new ArrayList<>();
-            fill(drawableComposite);
+            fill(drawableCompositeOld);
             if (d.size() == 0) {
                 throw new NoSuchElementException();
             }
         }
 
         private void fill(IDrawable drawable) {
-            if (drawable instanceof DrawableComposite) {
+            if (drawable instanceof DrawableCompositeOld) {
                 for (IDrawable iD :
-                        ((DrawableComposite) drawable).drawables) {
+                        ((DrawableCompositeOld) drawable).drawables) {
                     fill(iD);
                 }
             } else {
@@ -51,9 +51,9 @@ public class DrawableComposite implements IDrawable, Iterable<IDrawable> {
         }
 
         private void count(IDrawable drawable) {
-            if (drawable instanceof DrawableComposite) {
+            if (drawable instanceof DrawableCompositeOld) {
                 for (IDrawable iD :
-                        ((DrawableComposite) drawable).drawables) {
+                        ((DrawableCompositeOld) drawable).drawables) {
                     count(iD);
                 }
             } else {
@@ -69,11 +69,11 @@ public class DrawableComposite implements IDrawable, Iterable<IDrawable> {
 
         @Override
         public IDrawable next() {
-            this.count = 0;
             count(owner);
             if(this.d.size() != this.count) {
                 throw new ConcurrentModificationException();
             }
+            this.count = 0;
             return d.get(cursor++);
         }
 
