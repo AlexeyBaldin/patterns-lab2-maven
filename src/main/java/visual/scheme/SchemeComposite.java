@@ -31,7 +31,12 @@ public class SchemeComposite implements IScheme {
 
     @Override
     public void drawCenterPoint(IPointBase point) {
-        this.drawStartPoint(point);
+        schemes.forEach(scheme -> scheme.drawCenterPoint(point));
+    }
+
+    @Override
+    public void clear() {
+        schemes.forEach(IScheme::clear);
     }
 
 }

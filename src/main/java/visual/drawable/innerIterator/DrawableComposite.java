@@ -27,4 +27,14 @@ public class DrawableComposite implements IDrawable {
     public void iterate(IIterator iterator) {
         this.drawables.forEach(drawable -> drawable.iterate(iterator));
     }
+    public void clear() {
+        drawables.forEach(drawable -> {
+            if(drawable instanceof DrawableComposite) {
+                ((DrawableComposite) drawable).clear();
+                ((DrawableComposite) drawable).drawables.clear();
+            }
+        });
+        drawables.clear();
+    }
+
 }

@@ -7,4 +7,5 @@ public interface IScheme {
     void drawLine(IPointBase point, IPointBase point1);
     void drawEndPoint(IPointBase point);
     void drawCenterPoint(IPointBase point);
+    void clear();
 }

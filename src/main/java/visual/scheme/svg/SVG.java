@@ -28,4 +28,8 @@ public abstract class SVG implements ISVG {
         }
 
     }
+
+    public void clear() {
+        svgString = SVG_START;
+    }
 }

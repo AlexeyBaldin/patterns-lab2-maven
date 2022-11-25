@@ -5,6 +5,11 @@ import geometry.Line;
 import geometry.Point;
 import visual.drawable.*;
 import visual.drawable.innerIterator.DrawableComposite;
+import visual.operations.ACommand;
+import visual.operations.CommandManager;
+import visual.operations.commands.AddBezier;
+import visual.operations.commands.AddLine;
+import visual.operations.commands.Init;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
 import visual.scheme.IScheme;
@@ -21,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Frame extends JFrame {
 
-    private final IScheme schemeComposite;
+    private final SchemeComposite schemeComposite;
     private final DrawableComposite drawableComposite = new DrawableComposite();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -48,11 +53,14 @@ public class Frame extends JFrame {
 
         this.schemeComposite = new SchemeComposite(greenCanvas, blackCanvas, greenSVG, blackSVG);
 
+        new Init(this.schemeComposite).execute();
+
         setSize(800, 800);
         this.setLayout(new GridBagLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton generateButton = new JButton("Generate curve");
+        JButton undoButton = new JButton("Undo");
 
         JButton swgOneButton = new JButton("Save Scheme 1 in SVG");
         swgOneButton.setEnabled(false);
@@ -70,9 +78,8 @@ public class Frame extends JFrame {
 
 
         generateButton.addActionListener(e -> {
-            //System.out.print("Action(Line|Bezier|Demo): ");
-            //String input = scanner.next();
-            String input = "demo";
+            System.out.print("Action(Line|Bezier): ");
+            String input = scanner.next();
             switch (input.toLowerCase()) {
                 case "line":
                     System.out.print("Line coordinates: ");
@@ -81,11 +88,7 @@ public class Frame extends JFrame {
                     int x2 = scanner.nextInt();
                     int y2 = scanner.nextInt();
 
-                    this.drawableComposite.add(new VisualLine(new Line(
-                            new Point(x1, y1),
-                            new Point(x2, y2)
-                    )));
-                    this.drawableComposite.draw(schemeComposite);
+                    new AddLine(schemeComposite, drawableComposite, x1, y1, x2, y2).execute();
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
@@ -102,48 +105,33 @@ public class Frame extends JFrame {
                     int x4b = scanner.nextInt();
                     int y4b = scanner.nextInt();
 
-                    this.drawableComposite.add(new VisualBezier(new Bezier(
-                            new Point(x1b, y1b),
-                            new Point(x2b, y2b),
-                            new Point(x3b, y3b),
-                            new Point(x4b, y4b)
-                    )));
-
-                    this.drawableComposite.draw(schemeComposite);
+                    new AddBezier(schemeComposite, drawableComposite, x1b, y1b, x2b, y2b, x3b, y3b, x4b, y4b).execute();
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
 
-                    break;
-                case "demo":
-
-
-                    Line line = new Line(new Point(100, 100), new Point(100, 300));
-                    Line line2 = new Line(new Point(200, 100), new Point(200, 300));
-                    Bezier bezier = new Bezier(new Point(100, 350), new Point(300, 350), new Point(130, 330), new Point(270, 380));
-
-                    DrawableComposite testComposite = new DrawableComposite(new VisualLine(line), new VisualLine(line2));
-
-                    this.drawableComposite.add(testComposite, new VisualBezier(bezier));
-
-                    AtomicInteger counter = new AtomicInteger();
-                    this.drawableComposite.iterate((iterable) -> {
-                        counter.getAndIncrement();
-                        System.out.println(iterable);
-                    });
-                    System.out.println("Number of curves: " + counter);
-
-
-
-                    swgOneButton.setEnabled(true);
-                    swgTwoButton.setEnabled(true);
                     break;
                 default:
                     System.out.println("Unknown command!");
                     break;
             }
         });
-        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 2, false);
+
+        undoButton.addActionListener(e -> {
+            CommandManager.getInstance().undo();
+            blackCanvas.repaint();
+            greenCanvas.repaint();
+
+            AtomicInteger counter = new AtomicInteger();
+            drawableComposite.iterate((i) -> counter.getAndIncrement());
+            if(counter.get() == 0) {
+                swgOneButton.setEnabled(false);
+                swgTwoButton.setEnabled(false);
+            }
+        });
+
+        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 1, false);
+        addComponentToFrame(undoButton, GridBagConstraints.HORIZONTAL, 1, 0, 0.2, 0.2, 1, false);
 
         addComponentToFrame(new JLabel("Scheme 1", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 0, 1, 0.1, 0.1, 1, false);
 

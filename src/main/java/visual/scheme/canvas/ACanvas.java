@@ -20,4 +20,9 @@ public abstract class ACanvas extends Canvas implements IScheme {
         super.paint(g);
         this.drawableComposite.draw(this);
     }
+
+    @Override
+    public void clear() {
+        drawableComposite.clear();
+    }
 }
