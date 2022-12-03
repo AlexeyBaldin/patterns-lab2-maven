@@ -1,8 +1,10 @@
 package visual.scheme.svg;
 
-import geometry.IPoint;
+import geometry.Circle;
 import geometry.IPointBase;
 import visual.scheme.IScheme;
+
+import java.awt.*;
 
 public class GreenSVG extends SVG implements IScheme {
 
@@ -10,9 +12,16 @@ public class GreenSVG extends SVG implements IScheme {
 
     private IPointBase arrowPoint;
 
+    private Color color;
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     @Override
     public void drawStartPoint(IPointBase point) {
-        svgString += "<circle fill=\"rgb(0,255,0)\" cx=\"" + point.getX() + "\" cy=\"" + point.getY() + "\" r=\"" + radius/2 + "\" />\n";
+        this.drawCircle(new Circle(point.getX(), point.getY(), this.radius));
     }
 
     @Override
@@ -45,6 +54,18 @@ public class GreenSVG extends SVG implements IScheme {
 
     @Override
     public void drawCenterPoint(IPointBase point) {
-        this.drawStartPoint(point);
+        this.drawCircle(new Circle(point.getX(), point.getY(), this.radius));
     }
+
+    @Override
+    public void drawCircle(Circle circle) {
+        svgString += "<circle cx=\"" + circle.getX() + "\" cy=\"" + circle.getY() + "\" r=\"" + radius /2 + "\" />\n";
+    }
+
+    @Override
+    public void fillCircle(Circle circle) {
+        svgString += "<circle fill=\"rgb(0,255,0)\" cx=\"" + circle.getX() + "\" cy=\"" + circle.getY() + "\" r=\"" + radius /2 + "\" />\n";
+    }
+
+
 }

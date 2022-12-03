@@ -1,5 +1,6 @@
 package visual.scheme.canvas;
 
+import geometry.Circle;
 import geometry.IPointBase;
 import visual.drawable.innerIterator.DrawableComposite;
 
@@ -9,6 +10,13 @@ public class BlackCanvas extends ACanvas {
 
     private final int radius = 6;
 
+
+    private Color color;
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
     public BlackCanvas(DrawableComposite drawableComposite) {
         super(drawableComposite);
     }
@@ -16,7 +24,7 @@ public class BlackCanvas extends ACanvas {
     @Override
     public void drawStartPoint(IPointBase point) {
         Graphics graphics = this.getGraphics();
-        graphics.fillRect((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
+        graphics.fillRect((int)point.getX() - this.radius /2, (int)point.getY() - this.radius /2, this.radius, this.radius);
     }
 
     @Override
@@ -53,7 +61,20 @@ public class BlackCanvas extends ACanvas {
 
     @Override
     public void drawCenterPoint(IPointBase point) {
-        this.drawStartPoint(point);
+        this.fillCircle(new Circle(point.getX(), point.getY(), this.radius));
     }
+
+    @Override
+    public void drawCircle(Circle circle) {
+        Graphics graphics = this.getGraphics();
+        graphics.drawOval((int)(circle.getX() - circle.getRadius()), (int)(circle.getY() - circle.getRadius()), (int) circle.getRadius(), (int) circle.getRadius());
+    }
+
+    @Override
+    public void fillCircle(Circle circle) {
+        Graphics graphics = this.getGraphics();
+        graphics.fillOval((int)(circle.getX() - circle.getRadius()), (int)(circle.getY() - circle.getRadius()), (int) circle.getRadius(), (int) circle.getRadius());
+    }
+
 
 }

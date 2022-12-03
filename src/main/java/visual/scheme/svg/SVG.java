@@ -22,6 +22,7 @@ public abstract class SVG implements ISVG {
         try(FileWriter writer = new FileWriter(filename + ".svg", false)) {
             writer.write(svgString);
             writer.write(SVG_END);
+            clear(100, 100, 150, 150);
             writer.flush();
         } catch(IOException ex){
             System.out.println(ex.getMessage());
@@ -32,4 +33,10 @@ public abstract class SVG implements ISVG {
     public void clear() {
         svgString = SVG_START;
     }
+
+    public void clear(int x1, int y1, int x2, int y2) {
+        svgString += "";
+    }
+
+
 }

@@ -1,6 +1,5 @@
 package visual.drawable;
 
-import geometry.ICurve;
 import geometry.Line;
 import geometry.Util;
 import visual.scheme.IScheme;

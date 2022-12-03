@@ -1,10 +1,9 @@
-package visual.operations.commands;
+package visual.operations.commands.frame;
 
 import geometry.Bezier;
 import geometry.Point;
 import visual.drawable.VisualBezier;
 import visual.drawable.innerIterator.DrawableComposite;
-import visual.operations.ACommand;
 import visual.operations.ICommand;
 import visual.scheme.SchemeComposite;
 

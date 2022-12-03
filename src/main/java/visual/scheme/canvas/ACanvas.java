@@ -9,7 +9,6 @@ import java.awt.*;
 public abstract class ACanvas extends Canvas implements IScheme {
 
     private final DrawableComposite drawableComposite;
-
     public ACanvas(DrawableComposite drawableComposite) {
         super();
         this.drawableComposite = drawableComposite;
@@ -25,4 +24,5 @@ public abstract class ACanvas extends Canvas implements IScheme {
     public void clear() {
         drawableComposite.clear();
     }
+
 }

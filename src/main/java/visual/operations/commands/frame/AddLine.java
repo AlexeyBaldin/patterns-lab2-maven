@@ -1,10 +1,9 @@
-package visual.operations.commands;
+package visual.operations.commands.frame;
 
 import geometry.Line;
 import geometry.Point;
 import visual.drawable.VisualLine;
 import visual.drawable.innerIterator.DrawableComposite;
-import visual.operations.ICommand;
 import visual.scheme.SchemeComposite;
 
 public class AddLine extends FrameCommand {

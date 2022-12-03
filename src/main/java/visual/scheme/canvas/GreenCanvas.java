@@ -1,7 +1,7 @@
 package visual.scheme.canvas;
 
+import geometry.Circle;
 import geometry.IPointBase;
-import visual.drawable.DrawableCompositeOld;
 import visual.drawable.innerIterator.DrawableComposite;
 
 import java.awt.*;
@@ -12,15 +12,20 @@ public class GreenCanvas extends ACanvas {
 
     private IPointBase arrowPoint;
 
+    private Color color;
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public GreenCanvas(DrawableComposite drawableComposite) {
         super(drawableComposite);
     }
 
     @Override
     public void drawStartPoint(IPointBase point) {
-        Graphics graphics = this.getGraphics();
-        graphics.setColor(Color.GREEN);
-        graphics.fillOval((int)point.getX() - radius/2, (int)point.getY() - radius/2, radius, radius);
+        this.fillCircle(new Circle(point.getX(), point.getY(), this.radius));
     }
 
     @Override
@@ -28,7 +33,6 @@ public class GreenCanvas extends ACanvas {
         Graphics graphics = this.getGraphics();
         graphics.setColor(Color.GREEN);
         graphics.drawLine((int)point.getX(), (int)point.getY(), (int)point1.getX(), (int)point1.getY());
-//        System.out.println(point + " ---> " + point1);
         arrowPoint = point;
     }
 
@@ -61,6 +65,20 @@ public class GreenCanvas extends ACanvas {
 
     @Override
     public void drawCenterPoint(IPointBase point) {
-        this.drawStartPoint(point);
+        this.fillCircle(new Circle(point.getX(), point.getY(), this.radius));
+    }
+
+    @Override
+    public void drawCircle(Circle circle) {
+        Graphics graphics = this.getGraphics();
+        graphics.setColor(Color.GREEN);
+        graphics.drawOval((int)(circle.getX() - circle.getRadius()/2), (int)(circle.getY() - circle.getRadius()/2), (int) circle.getRadius(), (int) circle.getRadius());
+    }
+
+    @Override
+    public void fillCircle(Circle circle) {
+        Graphics graphics = this.getGraphics();
+        graphics.setColor(Color.GREEN);
+        graphics.fillOval((int)(circle.getX() - circle.getRadius()/2), (int)(circle.getY() - circle.getRadius()/2), (int) circle.getRadius(), (int) circle.getRadius());
     }
 }

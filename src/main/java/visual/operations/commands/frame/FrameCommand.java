@@ -1,4 +1,4 @@
-package visual.operations.commands;
+package visual.operations.commands.frame;
 
 import visual.drawable.innerIterator.DrawableComposite;
 import visual.operations.ACommand;

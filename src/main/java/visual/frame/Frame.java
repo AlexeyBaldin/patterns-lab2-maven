@@ -1,18 +1,11 @@
-package visual;
+package visual.frame;
 
-import geometry.*;
-import geometry.Line;
-import geometry.Point;
-import visual.drawable.*;
-import visual.drawable.innerIterator.DrawableComposite;
-import visual.operations.ACommand;
 import visual.operations.CommandManager;
-import visual.operations.commands.AddBezier;
-import visual.operations.commands.AddLine;
-import visual.operations.commands.Init;
+import visual.operations.commands.frame.AddBezier;
+import visual.operations.commands.frame.AddLine;
+import visual.operations.commands.frame.Init;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
-import visual.scheme.IScheme;
 import visual.scheme.SchemeComposite;
 import visual.scheme.svg.BlackSVG;
 import visual.scheme.svg.GreenSVG;
@@ -21,30 +14,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Frame extends JFrame {
+public class Frame extends AFrame {
 
     private final SchemeComposite schemeComposite;
-    private final DrawableComposite drawableComposite = new DrawableComposite();
-    private final Scanner scanner = new Scanner(System.in);
-
-    private void addComponentToFrame(Component component, int fill, int gridx, int gridy, double weightx, double weighty, int gridwidth, boolean isCanvas) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = fill;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.weightx = weightx;
-        c.weighty = weighty;
-        c.gridwidth = gridwidth;
-        if (isCanvas) {
-            component.setSize(this.getWidth() / 2, this.getHeight() / 2);
-        }
-        this.add(component, c);
-    }
 
     public Frame() {
+        super();
 
         GreenCanvas greenCanvas = new GreenCanvas(this.drawableComposite);
         BlackCanvas blackCanvas = new BlackCanvas(this.drawableComposite);
@@ -54,10 +31,6 @@ public class Frame extends JFrame {
         this.schemeComposite = new SchemeComposite(greenCanvas, blackCanvas, greenSVG, blackSVG);
 
         new Init(this.schemeComposite).execute();
-
-        setSize(800, 800);
-        this.setLayout(new GridBagLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton generateButton = new JButton("Generate curve");
         JButton undoButton = new JButton("Undo");
@@ -130,30 +103,30 @@ public class Frame extends JFrame {
             }
         });
 
-        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 1, false);
-        addComponentToFrame(undoButton, GridBagConstraints.HORIZONTAL, 1, 0, 0.2, 0.2, 1, false);
+        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 1);
+        addComponentToFrame(undoButton, GridBagConstraints.HORIZONTAL, 1, 0, 0.2, 0.2, 1);
 
-        addComponentToFrame(new JLabel("Scheme 1", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 0, 1, 0.1, 0.1, 1, false);
+        addComponentToFrame(new JLabel("Scheme 1", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 0, 1, 0.1, 0.1, 1);
 
-        addComponentToFrame(new JLabel("Scheme 2", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 1, 1, 0.1, 0.1, 1, false);
+        addComponentToFrame(new JLabel("Scheme 2", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 1, 1, 0.1, 0.1, 1);
 
-        addComponentToFrame(greenCanvas, GridBagConstraints.HORIZONTAL, 0, 2, 0.8, 0.8, 1, true);
+        addCanvasToFrame(greenCanvas,2, GridBagConstraints.HORIZONTAL, 0, 2, 0.8, 0.8, 1);
 
-        addComponentToFrame(blackCanvas, GridBagConstraints.HORIZONTAL, 1, 2, 0.8, 0.8, 1, true);
+        addCanvasToFrame(blackCanvas,2, GridBagConstraints.HORIZONTAL, 1, 2, 0.8, 0.8, 1);
 
 
         swgOneButton.addActionListener(e -> {
             greenSVG.flush("scheme1");
             System.out.println("SVG save is done in file: scheme1.svg");
         });
-        addComponentToFrame(swgOneButton, GridBagConstraints.HORIZONTAL, 0, 3, 0.2, 0.2, 1, false);
+        addComponentToFrame(swgOneButton, GridBagConstraints.HORIZONTAL, 0, 3, 0.2, 0.2, 1);
 
 
         swgTwoButton.addActionListener(e -> {
             blackSVG.flush("scheme2");
             System.out.println("SVG save is done in file: scheme2.svg");
         });
-        addComponentToFrame(swgTwoButton, GridBagConstraints.HORIZONTAL, 1, 3, 0.2, 0.2, 1, false);
+        addComponentToFrame(swgTwoButton, GridBagConstraints.HORIZONTAL, 1, 3, 0.2, 0.2, 1);
 
         setVisible(true);
     }

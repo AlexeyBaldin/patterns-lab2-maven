@@ -1,12 +1,8 @@
-package visual.operations.commands;
+package visual.operations.commands.frame;
 
 import visual.operations.ACommand;
 import visual.operations.ICommand;
-import visual.scheme.IScheme;
 import visual.scheme.SchemeComposite;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Init extends ACommand {
 

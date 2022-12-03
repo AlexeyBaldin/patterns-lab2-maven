@@ -1,13 +1,23 @@
 package visual.scheme.svg;
 
+import geometry.Circle;
 import geometry.IPointBase;
 import visual.scheme.IScheme;
 
+import java.awt.*;
+
 public class BlackSVG extends SVG implements IScheme {
 
+
+    private Color color = Color.BLACK;
+
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
     @Override
     public void drawStartPoint(IPointBase point) {
-        svgString += "<rect fill=\"black\" x=\"" + (point.getX() - radius/2) + "\" y=\"" + (point.getY() - radius/2) + "\" width=\"" + radius + "\" height=\"" + radius + "\" />\n";
+        svgString += "<rect fill=\"black\" x=\"" + (point.getX() - this.radius /2) + "\" y=\"" + (point.getY() - this.radius /2) + "\" width=\"" + this.radius + "\" height=\"" + this.radius + "\" />\n";
 
     }
 
@@ -24,6 +34,16 @@ public class BlackSVG extends SVG implements IScheme {
 
     @Override
     public void drawCenterPoint(IPointBase point) {
-        this.drawStartPoint(point);
+        this.drawCircle(new Circle(point.getX(), point.getY(), this.radius));
+    }
+
+    @Override
+    public void drawCircle(Circle circle) {
+        svgString += "<circle cx=\"" + circle.getX() + "\" cy=\"" + circle.getY() + "\" r=\"" + radius /2 + "\" />\n";
+    }
+
+    @Override
+    public void fillCircle(Circle circle) {
+        svgString += "<circle fill=\"rgb(0,0,0)\" cx=\"" + circle.getX() + "\" cy=\"" + circle.getY() + "\" r=\"" + radius /2 + "\" />\n";
     }
 }
