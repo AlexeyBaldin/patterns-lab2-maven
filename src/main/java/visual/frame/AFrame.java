@@ -1,6 +1,7 @@
 package visual.frame;
 
 import visual.drawable.innerIterator.DrawableComposite;
+import visual.scheme.SchemeComposite;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ public abstract class AFrame extends JFrame {
 
     protected final Scanner scanner = new Scanner(System.in);
     protected final DrawableComposite drawableComposite = new DrawableComposite();
+    protected SchemeComposite schemeComposite;
 
     protected AFrame() {
         setSize(800, 800);
@@ -32,4 +34,5 @@ public abstract class AFrame extends JFrame {
         canvas.setSize((int)(this.getWidth() / canvasCoeff), (int)(this.getHeight() / canvasCoeff));
         this.addComponentToFrame(canvas, fill, gridx, gridy, weightx, weighty, gridwidth);
     }
+
 }

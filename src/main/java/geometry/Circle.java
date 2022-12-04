@@ -30,4 +30,5 @@ public class Circle extends Point implements ICurve {
                 ", radius=" + radius +
                 '}';
     }
+
 }

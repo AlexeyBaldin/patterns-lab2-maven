@@ -22,7 +22,9 @@ public abstract class ACanvas extends Canvas implements IScheme {
 
     @Override
     public void clear() {
-        drawableComposite.clear();
+        if(this.getGraphics() != null) {
+            this.getGraphics().clearRect(0,0, this.getWidth(), this.getHeight());
+        }
     }
 
 }

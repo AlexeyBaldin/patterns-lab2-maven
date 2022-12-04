@@ -1,16 +1,17 @@
 package visual.operations;
 
-public abstract class ACommand implements ICommand{
+public abstract class ACommand implements ICommand, Cloneable{
 
     @Override
     public final void execute() {
-        CommandManager.getInstance().registry(this.clone());
-        doExecute();
+        try {
+            CommandManager.getInstance().registry((ICommand) this.clone());
+            doExecute();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected abstract void doExecute();
-
-    @Override
-    public abstract ICommand clone();
 
 }

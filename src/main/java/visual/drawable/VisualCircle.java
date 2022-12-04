@@ -21,9 +21,16 @@ public class VisualCircle implements IDrawable, IObserver, Movable {
         this.color = color;
         this.pow2Radius = Math.pow(circle.getRadius(), 2) / 4;
     }
-
     public boolean isActive() {
         return isActive;
+    }
+
+    public double getX() {
+        return this.circle.getX();
+    }
+
+    public double getY() {
+        return this.circle.getY();
     }
 
     @Override
@@ -44,7 +51,6 @@ public class VisualCircle implements IDrawable, IObserver, Movable {
 
     @Override
     public void update() {
-        System.out.println(this.color);
         if (this.color == Color.WHITE) {
             this.isActive = true;
             this.color = Color.GREEN;

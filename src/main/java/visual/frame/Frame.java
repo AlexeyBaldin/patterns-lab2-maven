@@ -1,9 +1,10 @@
 package visual.frame;
 
-import visual.operations.CommandManager;
-import visual.operations.commands.frame.AddBezier;
-import visual.operations.commands.frame.AddLine;
-import visual.operations.commands.frame.Init;
+import geometry.Bezier;
+import geometry.Line;
+import geometry.Point;
+import visual.drawable.VisualBezier;
+import visual.drawable.VisualLine;
 import visual.scheme.canvas.BlackCanvas;
 import visual.scheme.canvas.GreenCanvas;
 import visual.scheme.SchemeComposite;
@@ -18,8 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Frame extends AFrame {
 
-    private final SchemeComposite schemeComposite;
-
     public Frame() {
         super();
 
@@ -30,10 +29,7 @@ public class Frame extends AFrame {
 
         this.schemeComposite = new SchemeComposite(greenCanvas, blackCanvas, greenSVG, blackSVG);
 
-        new Init(this.schemeComposite).execute();
-
         JButton generateButton = new JButton("Generate curve");
-        JButton undoButton = new JButton("Undo");
 
         JButton swgOneButton = new JButton("Save Scheme 1 in SVG");
         swgOneButton.setEnabled(false);
@@ -61,7 +57,10 @@ public class Frame extends AFrame {
                     int x2 = scanner.nextInt();
                     int y2 = scanner.nextInt();
 
-                    new AddLine(schemeComposite, drawableComposite, x1, y1, x2, y2).execute();
+                    VisualLine visualLine = new VisualLine(new Line(new Point(x1, y1), new Point(x2, y2)));
+                    this.drawableComposite.add(visualLine);
+                    this.drawableComposite.draw(this.schemeComposite);
+
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
@@ -78,7 +77,9 @@ public class Frame extends AFrame {
                     int x4b = scanner.nextInt();
                     int y4b = scanner.nextInt();
 
-                    new AddBezier(schemeComposite, drawableComposite, x1b, y1b, x2b, y2b, x3b, y3b, x4b, y4b).execute();
+                    VisualBezier visualBezier = new VisualBezier(new Bezier(new Point(x1b, y1b), new Point(x2b, y2b), new Point(x3b, y3b), new Point(x4b, y4b) ));
+                    this.drawableComposite.add(visualBezier);
+                    this.drawableComposite.draw(this.schemeComposite);
 
                     swgOneButton.setEnabled(true);
                     swgTwoButton.setEnabled(true);
@@ -90,21 +91,8 @@ public class Frame extends AFrame {
             }
         });
 
-        undoButton.addActionListener(e -> {
-            CommandManager.getInstance().undo();
-            blackCanvas.repaint();
-            greenCanvas.repaint();
 
-            AtomicInteger counter = new AtomicInteger();
-            drawableComposite.iterate((i) -> counter.getAndIncrement());
-            if(counter.get() == 0) {
-                swgOneButton.setEnabled(false);
-                swgTwoButton.setEnabled(false);
-            }
-        });
-
-        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 1);
-        addComponentToFrame(undoButton, GridBagConstraints.HORIZONTAL, 1, 0, 0.2, 0.2, 1);
+        addComponentToFrame(generateButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.2, 0.2, 2);
 
         addComponentToFrame(new JLabel("Scheme 1", SwingConstants.CENTER), GridBagConstraints.HORIZONTAL, 0, 1, 0.1, 0.1, 1);
 
