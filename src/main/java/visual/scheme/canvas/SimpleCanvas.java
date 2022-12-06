@@ -2,16 +2,9 @@ package visual.scheme.canvas;
 
 import geometry.Circle;
 import geometry.IPointBase;
-import visual.drawable.VisualCircle;
-import visual.drawable.innerIterator.DrawableComposite;
-import visual.observer.IObserver;
-import visual.observer.ISubject;
+import visual.drawable.DrawableComposite;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Observer;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SimpleCanvas extends ACanvas {
 

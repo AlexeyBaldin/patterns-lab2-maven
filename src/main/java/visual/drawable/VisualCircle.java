@@ -45,7 +45,7 @@ public class VisualCircle implements IDrawable, IMovable, IObserver {
 
     public void erase(IScheme scheme) {
         scheme.setColor(new Color(238, 238, 238));
-        scheme.fillCircle(new Circle(circle.getX(), circle.getY(), circle.getRadius() + 3));
+        scheme.fillCircle(new Circle(circle.getX(), circle.getY(), circle.getRadius() + 5));
     }
 
     public boolean check(double x, double y) {

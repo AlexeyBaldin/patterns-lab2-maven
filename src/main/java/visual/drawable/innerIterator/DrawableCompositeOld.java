@@ -1,5 +1,6 @@
-package visual.drawable;
+package visual.drawable.innerIterator;
 
+import visual.drawable.IDrawable;
 import visual.scheme.IScheme;
 
 import java.util.*;

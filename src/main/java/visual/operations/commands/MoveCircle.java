@@ -1,9 +1,7 @@
 package visual.operations.commands;
 
 import visual.drawable.VisualCircle;
-import visual.drawable.innerIterator.DrawableComposite;
-import visual.frame.NewFrame;
-import visual.operations.CommandManager;
+import visual.drawable.DrawableComposite;
 import visual.scheme.SchemeComposite;
 
 public class MoveCircle extends NewFrameCommand {

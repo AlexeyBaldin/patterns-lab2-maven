@@ -1,13 +1,10 @@
 package visual.operations.commands;
 
-import javafx.util.Pair;
 import visual.drawable.VisualCircle;
-import visual.drawable.innerIterator.DrawableComposite;
+import visual.drawable.DrawableComposite;
 import visual.scheme.SchemeComposite;
-import visual.scheme.canvas.SimpleCanvas;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Init extends NewFrameCommand {
 

@@ -1,6 +1,6 @@
 package visual.frame;
 
-import visual.drawable.innerIterator.DrawableComposite;
+import visual.drawable.DrawableComposite;
 import visual.scheme.SchemeComposite;
 
 import javax.swing.*;

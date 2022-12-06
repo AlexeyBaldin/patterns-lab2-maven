@@ -26,13 +26,11 @@ public class NewFrame extends AFrame {
     public NewFrame() {
         super();
 
-
         JButton undoButton = new JButton("Undo");
 
         undoButton.addActionListener(e -> CommandManager.getInstance().undo());
 
         addComponentToFrame(undoButton, GridBagConstraints.HORIZONTAL, 0, 0, 0.1, 0.1, 1);
-
 
         class Subject implements MouseMotionListener, MouseListener, ISubject {
 

@@ -2,7 +2,7 @@ package visual.scheme.canvas;
 
 import geometry.Circle;
 import geometry.IPointBase;
-import visual.drawable.innerIterator.DrawableComposite;
+import visual.drawable.DrawableComposite;
 
 import java.awt.*;
 
