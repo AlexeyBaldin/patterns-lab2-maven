@@ -1,15 +1,12 @@
 package visual.drawable;
 
 import geometry.Circle;
-import geometry.IPoint;
-import geometry.IPointBase;
-import geometry.Point;
 import visual.observer.IObserver;
 import visual.scheme.IScheme;
 
 import java.awt.*;
 
-public class VisualCircle implements IDrawable, IObserver, Movable {
+public class VisualCircle implements IDrawable, IMovable, IObserver {
 
     private final Circle circle;
     private Color color;
@@ -31,6 +28,12 @@ public class VisualCircle implements IDrawable, IObserver, Movable {
 
     public double getY() {
         return this.circle.getY();
+    }
+
+    @Override
+    public void move(double x, double y) {
+        this.circle.setX(x);
+        this.circle.setY(y);
     }
 
     @Override
@@ -60,9 +63,5 @@ public class VisualCircle implements IDrawable, IObserver, Movable {
         }
     }
 
-    @Override
-    public void move(double x, double y) {
-        this.circle.setX(x);
-        this.circle.setY(y);
-    }
+
 }
